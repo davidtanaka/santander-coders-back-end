@@ -53,10 +53,19 @@ public class LinkedList {
           length = 0;
      }
 
+     public void print() {
+          Node temp = this.head;
+          while (temp != null){
+               System.out.println(temp.data);
+               temp = temp.next;
+          }
+     }
+
      public static void main(String[] args) {
           LinkedList list = new LinkedList("Elemento 1");
           list.getHead();
           list.getTail();
           list.getLength();
+          list.print();
      }
 }
