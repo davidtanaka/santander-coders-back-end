@@ -54,15 +54,31 @@ public class LinkedList {
      }
 
      public void print() {
+          System.out.println("###################");
           Node temp = this.head;
           while (temp != null){
                System.out.println(temp.data);
                temp = temp.next;
           }
+          System.out.println("###################");
+     }
+
+     public void append(String data) {
+          Node newNode = new Node(data);
+          if (length == 0) {
+               head = newNode;
+               tail = newNode;
+          } else {
+               tail.next = newNode;
+               tail = newNode;
+          }
+          length ++;
      }
 
      public static void main(String[] args) {
           LinkedList list = new LinkedList("Elemento 1");
+          list.append("Elemento 2");
+          list.append("Elemento 3");
           list.getHead();
           list.getTail();
           list.getLength();
