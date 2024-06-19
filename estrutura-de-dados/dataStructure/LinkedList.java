@@ -97,13 +97,26 @@ public class LinkedList {
           return temp;
      }
 
+     public void prepend(String data) {
+          Node newNode = new Node(data);
+          if (length == 0) {
+               head = newNode;
+               tail = newNode;
+          } else {
+               newNode.next = head;
+               head = newNode;
+          }
+          length++;
+     }
+
 
      public static void main(String[] args) {
           LinkedList list = new LinkedList("Elemento 1");
           list.append("Elemento 2");
           list.append("Elemento 3");
+          list.prepend("Olá mundo");
 
-          System.out.println(list.removeLast().data);
+          // System.out.println(list.removeLast().data);
           list.print();
 
           // list.getHead();
