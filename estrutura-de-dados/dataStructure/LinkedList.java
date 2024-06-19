@@ -1,5 +1,7 @@
 package dataStructure;
 
+import java.lang.runtime.TemplateRuntime;
+
 public class LinkedList {
 
      private Node head;
@@ -109,6 +111,19 @@ public class LinkedList {
           length++;
      }
 
+     public Node removeFirst() {
+          if (length == 0) return null;
+          Node temp = head;
+          head = head.next;
+          temp.next = null;
+          length--;
+          if (length == 0) {
+               head = null;
+               tail = null;
+          }
+          return temp;
+     }
+
 
      public static void main(String[] args) {
           LinkedList list = new LinkedList("Elemento 1");
@@ -117,6 +132,7 @@ public class LinkedList {
           list.prepend("Olá mundo");
 
           // System.out.println(list.removeLast().data);
+          System.out.println(list.removeFirst().data);
           list.print();
 
           // list.getHead();
