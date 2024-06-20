@@ -1,6 +1,7 @@
 package dataStructure;
 
 import java.lang.runtime.TemplateRuntime;
+import java.util.List;
 
 public class LinkedList {
 
@@ -124,6 +125,60 @@ public class LinkedList {
           return temp;
      }
 
+     public Node get(int index) {
+          if (index < 0 || index >= length) return null;
+          Node temp = head;
+          for (int i = 0; i<index; i++) {
+               temp = temp.next;
+          }
+          return temp;
+     }
+
+
+     public boolean set(int index, String data) {
+          Node temp = get(index);
+          if (temp != null) {
+               temp.data = data;
+               return true;
+          }
+          return false;
+     }
+
+
+     public boolean insert(int index, String data) {
+          if (index < 0 || index > length) return false;
+          if (index == 0) {
+               prepend(data);
+               return true;
+          }
+          if (index == length) {
+               append(data);
+               return true;
+          }
+
+          Node newNode = new Node(data);
+          Node temp = get(index -1);
+          newNode.next = temp.next;
+          temp.next = newNode;
+          length++;
+          return true;
+     }
+
+     public Node remove(int index) {
+          if (index < 0 || index >= length) return null;
+          if (index == 0) return removeFirst();
+          if (index == -1) return removeLast();
+
+          Node prev = get(index -1);
+          Node temp = prev.next;
+
+          prev.next = temp.next;
+          temp.next = null;
+          length--;
+
+          return temp;
+     }
+
 
      public static void main(String[] args) {
           LinkedList list = new LinkedList("Elemento 1");
@@ -131,9 +186,20 @@ public class LinkedList {
           list.append("Elemento 3");
           list.prepend("Olá mundo");
 
-          // System.out.println(list.removeLast().data);
-          System.out.println(list.removeFirst().data);
+          list.remove(1);
           list.print();
+
+          // list.insert(3, "Elemento 2.5");
+
+          // System.out.println(list.get(2).data);
+
+
+          // System.out.println(list.removeLast().data);
+          // System.out.println(list.removeFirst().data);
+          // list.print();
+
+          // list.set(1, "elemento 0.5");
+          // list.print();
 
           // list.getHead();
           // list.getTail();
