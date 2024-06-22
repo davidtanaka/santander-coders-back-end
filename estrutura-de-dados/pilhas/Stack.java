@@ -2,19 +2,24 @@ package pilhas;
 
 public class Stack {
      
-     private Node top;
-     private int height;
+     public Node top;
+     public int height;
 
-     class Node {
+     public class Node {
           int value;
 
           Node next;
 
-          Node(int value) {
+          Node (int value) {
                this.value = value;
           }
-     }
 
+          public int getValue() {
+               return value;
+          }
+          
+     }
+     
      public Stack(int value) {
           Node newNode = new Node(value);
           top = newNode;
@@ -65,27 +70,27 @@ public class Stack {
 
           return temp;
      }
-
-
-     public static void main(String[] args) {
-          Stack myStack = new Stack(2);
-          
-          myStack.push(1);
-
-          System.out.println(myStack.pop().value);
-          System.out.println(myStack.pop().value);
-
-          // myStack.getTop();
-          // myStack.getHeight();
-     
-          // myStack.print();
-
-
-          // myStack.print();
-
-          // myStack.getTop();
-          // myStack.getHeight();
-
-     }
-
 }
+
+//      public static void main(String[] args) {
+//           Stack myStack = new Stack(2);
+          
+//           myStack.push(1);
+
+//           System.out.println(myStack.pop().value);
+//           System.out.println(myStack.pop().value);
+
+//           // myStack.getTop();
+//           // myStack.getHeight();
+     
+//           // myStack.print();
+
+
+//           // myStack.print();
+
+//           // myStack.getTop();
+//           // myStack.getHeight();
+
+//      }
+
+// }
