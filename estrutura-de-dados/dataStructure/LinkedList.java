@@ -1,208 +1,193 @@
 package dataStructure;
-import java.lang.runtime.TemplateRuntime;
-import java.util.List;
 
 public class LinkedList {
 
-     private Node head;
+    private Node head;
+    private Node tail;
+    private int length;
 
-     private Node tail;
+    class Node {
+        String data;
+        Node next;
 
-     private int length;
+        Node(String data) {
+            this.data = data;
+        }
+    }
 
-     class Node {
-          String data;
+    public LinkedList(String data) {
+        length = 1;
+        Node newNode = new Node(data);
+        head = newNode;
+        tail = newNode;
+    }
 
-          Node next;
+    public void getHead() {
+        if (this.head == null) {
+            System.out.println("Lista vazia");
+        } else {
+            System.out.println("Head: " + head.data);
+        }
+    }
 
-          Node(String data){
-               this.data = data;
-          }
+    public void getTail() {
+        if (this.head == null) {
+            System.out.println("Lista vazia");
+        } else {
+            System.out.println("Tail: " + tail.data);
+        }
+    }
 
-     }
+    public void getLength() {
+        System.out.println("Length: " + this.length);
+    }
 
-     public LinkedList(String data) {
-          length =1;
-          Node newNode = new Node(data);
-          head = newNode;
-          tail = newNode;
-     }
+    public void makeEmpty() {
+        head = null;
+        tail = null;
+        length = 0;
+    }
 
-     public void getHead() {
-          if (this.head == null) {
-               System.out.println("Lista vazia");
-          } else {
-               System.out.println("Head" + head.data);
-          }
+    public void print() {
+        System.out.println("###################");
+        Node temp = this.head;
+        while (temp != null) {
+            System.out.println(temp.data);
+            temp = temp.next;
+        }
+        System.out.println("###################");
+    }
 
-     }
+    public void append(String data) {
+        Node newNode = new Node(data);
+        if (length == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        length++;
+    }
 
-     public void getTail() {
-          if (this.head == null) {
-               System.out.println("Lista vazia");
-          }  else {
-               System.out.println("Tail" + tail.data);
-          }
-     }
+    public Node removeLast() {
+        if (length == 0) return null;
 
-     public void getLength() {
-          System.out.println("Length: " + this.length);
-     }
+        Node temp = tail;
+        if (length == 1) {
+            head = null;
+            tail = null;
+        } else {
+            Node pre = head;
+            while (pre.next != tail) {
+                pre = pre.next;
+            }
+            tail = pre;
+            tail.next = null;
+        }
+        length--;
+        return temp;
+    }
 
-     public void makeEmpty() {
-          head = null;
-          tail = null;
-          length = 0;
-     }
+    public void prepend(String data) {
+        Node newNode = new Node(data);
+        if (length == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+        length++;
+    }
 
-     public void print() {
-          System.out.println("###################");
-          Node temp = this.head;
-          while (temp != null){
-               System.out.println(temp.data);
-               temp = temp.next;
-          }
-          System.out.println("###################");
-     }
+    public Node removeFirst() {
+        if (length == 0) return null;
+        Node temp = head;
+        head = head.next;
+        temp.next = null;
+        length--;
+        if (length == 0) {
+            tail = null;
+        }
+        return temp;
+    }
 
-     public void append(String data) {
-          Node newNode = new Node(data);
-          if (length == 0) {
-               head = newNode;
-               tail = newNode;
-          } else {
-               tail.next = newNode;
-               tail = newNode;
-          }
-          length ++;
-     }
+    public Node get(int index) {
+        if (index < 0 || index >= length) return null;
+        Node temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        return temp;
+    }
 
+    public boolean set(int index, String data) {
+        Node temp = get(index);
+        if (temp != null) {
+            temp.data = data;
+            return true;
+        }
+        return false;
+    }
 
-     public Node removeLast() {
-          if (length == 0) return null;
-          Node pre = head;
-          Node temp = null;
+    public boolean insert(int index, String data) {
+        if (index < 0 || index > length) return false;
+        if (index == 0) {
+            prepend(data);
+            return true;
+        }
+        if (index == length) {
+            append(data);
+            return true;
+        }
 
-          while(pre.next != tail) {
-               pre = pre.next;
-          }
+        Node newNode = new Node(data);
+        Node temp = get(index - 1);
+        newNode.next = temp.next;
+        temp.next = newNode;
+        length++;
+        return true;
+    }
 
-          temp = tail;
-          tail = pre;
-          tail.next = null;
+    public Node remove(int index) {
+        if (index < 0 || index >= length) return null;
+        if (index == 0) return removeFirst();
+        if (index == length - 1) return removeLast();
 
-          length--;
-          if (length == 0) {
-               head = null;
-               tail = null;
-          }
-          return temp;
-     }
+        Node prev = get(index - 1);
+        Node temp = prev.next;
 
-     public void prepend(String data) {
-          Node newNode = new Node(data);
-          if (length == 0) {
-               head = newNode;
-               tail = newNode;
-          } else {
-               newNode.next = head;
-               head = newNode;
-          }
-          length++;
-     }
+        prev.next = temp.next;
+        temp.next = null;
+        length--;
 
-     public Node removeFirst() {
-          if (length == 0) return null;
-          Node temp = head;
-          head = head.next;
-          temp.next = null;
-          length--;
-          if (length == 0) {
-               head = null;
-               tail = null;
-          }
-          return temp;
-     }
+        return temp;
+    }
 
-     public Node get(int index) {
-          if (index < 0 || index >= length) return null;
-          Node temp = head;
-          for (int i = 0; i<index; i++) {
-               temp = temp.next;
-          }
-          return temp;
-     }
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList("Elemento 1");
+        list.append("Elemento 2");
+        list.append("Elemento 3");
+        list.prepend("Olá mundo");
 
+        list.remove(1);
+        list.print();
 
-     public boolean set(int index, String data) {
-          Node temp = get(index);
-          if (temp != null) {
-               temp.data = data;
-               return true;
-          }
-          return false;
-     }
+        // list.insert(3, "Elemento 2.5");
 
+        // System.out.println(list.get(2).data);
 
-     public boolean insert(int index, String data) {
-          if (index < 0 || index > length) return false;
-          if (index == 0) {
-               prepend(data);
-               return true;
-          }
-          if (index == length) {
-               append(data);
-               return true;
-          }
+        // System.out.println(list.removeLast().data);
+        // System.out.println(list.removeFirst().data);
+        // list.print();
 
-          Node newNode = new Node(data);
-          Node temp = get(index -1);
-          newNode.next = temp.next;
-          temp.next = newNode;
-          length++;
-          return true;
-     }
+        // list.set(1, "elemento 0.5");
+        // list.print();
 
-     public Node remove(int index) {
-          if (index < 0 || index >= length) return null;
-          if (index == 0) return removeFirst();
-          if (index == -1) return removeLast();
-
-          Node prev = get(index -1);
-          Node temp = prev.next;
-
-          prev.next = temp.next;
-          temp.next = null;
-          length--;
-
-          return temp;
-     }
-
-
-     public static void main(String[] args) {
-          LinkedList list = new LinkedList("Elemento 1");
-          list.append("Elemento 2");
-          list.append("Elemento 3");
-          list.prepend("Olá mundo");
-
-          list.remove(1);
-          list.print();
-
-          // list.insert(3, "Elemento 2.5");
-
-          // System.out.println(list.get(2).data);
-
-
-          // System.out.println(list.removeLast().data);
-          // System.out.println(list.removeFirst().data);
-          // list.print();
-
-          // list.set(1, "elemento 0.5");
-          // list.print();
-
-          // list.getHead();
-          // list.getTail();
-          // list.getLength();
-          // list.print();
-     }
+        // list.getHead();
+        // list.getTail();
+        // list.getLength();
+        // list.print();
+    }
 }
