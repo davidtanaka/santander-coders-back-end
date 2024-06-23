@@ -7,17 +7,15 @@ public class Stack {
 
      public class Node {
           int value;
-
           Node next;
 
-          Node (int value) {
+          Node(int value) {
                this.value = value;
           }
 
           public int getValue() {
                return value;
           }
-          
      }
      
      public Stack(int value) {
@@ -30,7 +28,7 @@ public class Stack {
           if (top == null) {
                System.out.println("Pilha vazia");
           } else {
-               System.out.println("Topo" + top.value);
+               System.out.println("Topo " + top.value);
           }
      }
 
@@ -46,7 +44,6 @@ public class Stack {
                temp = temp.next;
           }
           System.out.println("###################");
-
      }
 
      public void push(int value) {
