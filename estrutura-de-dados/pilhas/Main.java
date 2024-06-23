@@ -12,16 +12,15 @@ public class Main {
      private static void inverter(final int[] numeros) {
           Stack stack = new Stack(numeros[0]);
 
-          for (int i =1; i < numeros.length; i++) {
+          for (int i = 1; i < numeros.length; i++) {
                stack.push(numeros[i]);
           }
 
-          var node = Stack.pop;  // Não tem erro
+          Stack.Node node = stack.pop();  // Corrigido para acessar método pop da instância stack
           while(node != null){
-               System.out.println(node.getValue()); // Não tem erro
+               System.out.println(node.getValue());
                node = stack.pop();
           }
           
      }
-
 }
