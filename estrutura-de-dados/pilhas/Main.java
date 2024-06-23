@@ -18,7 +18,7 @@ public class Main {
 
           var node = Stack.pop;
           while(node != null){
-               System.out.println(node.getValue());
+               System.out.println(node.getValue()); // Não tem erro
                node = stack.pop();
           }
           
