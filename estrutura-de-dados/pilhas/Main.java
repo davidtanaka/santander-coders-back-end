@@ -16,7 +16,7 @@ public class Main {
                stack.push(numeros[i]);
           }
 
-          var node = Stack.pop;
+          var node = Stack.pop;  // Não tem erro
           while(node != null){
                System.out.println(node.getValue()); // Não tem erro
                node = stack.pop();
